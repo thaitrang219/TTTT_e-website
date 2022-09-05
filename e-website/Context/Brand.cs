@@ -11,7 +11,8 @@ namespace e_website.Context
 {
     using System;
     using System.Collections.Generic;
-    
+    using System.ComponentModel.DataAnnotations.Schema;
+
     public partial class Brand
     {
         public int Id { get; set; }
@@ -23,5 +24,9 @@ namespace e_website.Context
         public Nullable<System.DateTime> CreatedOnUtc { get; set; }
         public Nullable<System.DateTime> UpdateOnUtc { get; set; }
         public Nullable<bool> Deleted { get; set; }
+
+        [NotMapped]
+        public System.Web.HttpPostedFileBase ImageUpLoad { get; set; }
     }
 }
+

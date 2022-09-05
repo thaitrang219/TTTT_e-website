@@ -3,5 +3,73 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Admin</h2>
+<!-- Content Header (Page header) -->
+<div class="content-header">
+    <div class="container-fluid">
+        <div class="row mb-2">
+            <div class="col-sm-6">
+                <h1 class="m-0">Trang quản trị</h1>
+            </div><!-- /.col -->
+        </div><!-- /.row -->
+    </div><!-- /.container-fluid -->
+</div>
+<!-- /.content-header -->
+<!-- Main content -->
+<section class="content">
+    <div class="container-fluid>
+        <!-- Small boxes (Stat box) -->
+        <div class="row">
+            <div class="col-lg-3 col-6">
+                <!-- small box -->
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <p>Tất cả đơn hàng</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Order")" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <p>Tất cả sản phẩm</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Product")" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <p>Tất cả thương hiệu</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Brand")" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <p>Tất cả thành viên</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "User")" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+                <div class="small-box bg-success">
+                    <div class="inner">
+                        <p>Tất cả danh mục</p>
+                    </div>
+                    <div class="icon">
+                        <i class="ion ion-bag"></i>
+                    </div>
+                    <a href="@Url.Action("Index", "Category")" class="small-box-footer"><i class="fas fa-arrow-circle-right"></i></a>
+                </div>
+            </div>
+        </div>
 
+            <!-- /.row -->
+        </div>
+</section>
+<!-- /.content -->

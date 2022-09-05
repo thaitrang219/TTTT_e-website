@@ -1,0 +1,71 @@
+﻿@model e_website.Context.Category
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<!-- Main content -->
+<section class="content my-2">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>XÁC NHẬN XOÁ DANH MỤC</strong>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="@Url.Action("Edit","Category", new { id = Model.Id })" class="btn btn-sm btn-success"><i class="fa fa-edit"></i> Cập nhật</a>
+                        <a href="@Url.Action("Index","Category")" class="btn btn-sm btn-info"><i class="fas fa-long-arrow-alt-left"></i> Về danh sách</a>
+                        <button class="btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Xoá</button>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr>
+                    <th style="width:120px;">Tên trường</th>
+                    <th>Nội dung</th>
+                </tr>
+                <tr>
+                    <td>Tên danh mục</td>
+                    <td>@Html.DisplayFor(model => model.Name)</td>
+                </tr>
+                <tr>
+                    <td>Hình</td>
+                    <td><img src="~/Content/images/category/@Html.DisplayFor(model => model.Avatar)" style="width:100px;" /></td>
+                </tr>
+                <tr>
+                    <td>Loại danh mục</td>
+                    @if (Model.IsPopular == 1)
+                    {
+                        <td>Danh mục phổ biến</td>
+                    }
+                    @if (Model.IsPopular == null)
+                    {
+                        <td>Danh mục</td>
+                    }
+                </tr>
+                <tr>
+                    <td>Ngày tạo</td>
+                    <td>@Html.DisplayFor(model => model.CreatedOnUtc)</td>
+                </tr>
+                <tr>
+                    <td>Ngày cập nhật</td>
+                    <td>@Html.DisplayFor(model => model.UpdatedOnUtc)</td>
+                </tr>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->

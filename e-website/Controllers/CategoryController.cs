@@ -9,8 +9,9 @@ namespace e_website.Controllers
 {
     public class CategoryController : Controller
     {
-        // GET: Category
         qlbhEntities objqlbhEntities = new qlbhEntities();
+        //
+        // GET: /Category/
         public ActionResult Index()
         {
             var lstCategory = objqlbhEntities.Categories.ToList();
@@ -18,8 +19,8 @@ namespace e_website.Controllers
         }
         public ActionResult ProductCategory(int Id)
         {
-            var listProduct = objqlbhEntities.Products.Where(n => n.CategoryId == Id).ToList();
-            return View(listProduct);   
+            var lstProduct = objqlbhEntities.Products.Where(n => n.CategoryId == Id).ToList();
+            return View(lstProduct);
         }
     }
 }

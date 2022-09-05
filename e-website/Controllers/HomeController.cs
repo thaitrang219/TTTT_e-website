@@ -7,38 +7,53 @@ using e_website.Context;
 using e_website.Models;
 using System.Security.Cryptography;
 using System.Text;
-
+using User = e_website.Context.User;
+using PagedList;
+//using Product = e_website.Context.Product;
 
 namespace e_website.Controllers
 {
     public class HomeController : Controller
     {
         qlbhEntities objqlbhEntities = new qlbhEntities();
-        //private List<Category> stCategories;
+
+        
 
         public ActionResult Index()
         {
+            List<Category> lstCate = new List<Category>();
+            lstCate = objqlbhEntities.Categories.ToList();
+
+            List<Product> lstPro = new List<Product>();
+            lstPro = objqlbhEntities.Products.ToList();
+
             HomeModel objHomeModel = new HomeModel();
-            objHomeModel.ListCategory = objqlbhEntities.Categories.ToList();
-            objHomeModel.ListProduct = objqlbhEntities.Products.ToList();
+            objHomeModel.ListCategory = lstCate;
+            objHomeModel.ListProduct = lstPro;
+
             return View(objHomeModel);
         }
+        
+        
+
         [HttpGet]
         public ActionResult Register()
         {
             return View();
         }
+
         [HttpPost]
-        public ActionResult Register(User _user)
+        [ValidateAntiForgeryToken]
+        public ActionResult Register(User user)
         {
             if (ModelState.IsValid)
             {
-                var check = objqlbhEntities.Users.FirstOrDefault(s => s.Email == _user.Email);
+                var check = objqlbhEntities.Users.FirstOrDefault(s => s.Email == user.Email);
                 if (check == null)
                 {
-                    _user.Password = GetMD5(_user.Password);
+                    user.Password = GetMD5(user.Password);
                     objqlbhEntities.Configuration.ValidateOnSaveEnabled = false;
-                    objqlbhEntities.Users.Add(_user);
+                    objqlbhEntities.Users.Add(user);
                     objqlbhEntities.SaveChanges();
                     return RedirectToAction("Login");
                 }
@@ -50,7 +65,21 @@ namespace e_website.Controllers
             }
             return View("Index");
         }
-        
+
+        //Mã hoá mật khẩu
+        public static string GetMD5(string str)
+        {
+            MD5 md5 = new MD5CryptoServiceProvider();
+            byte[] formData = Encoding.UTF8.GetBytes(str);
+            byte[] targetData = md5.ComputeHash(formData);
+            string byte2String = null;
+
+            for (int i = 0; i < targetData.Length; i++)
+            {
+                byte2String += targetData[i].ToString("x2");
+            }
+            return byte2String;
+        }
 
         [HttpGet]
         public ActionResult Login()
@@ -71,7 +100,7 @@ namespace e_website.Controllers
                 if (data.Count() > 0)
                 {
                     //add session
-                    Session["FullName"] = data.FirstOrDefault().FirstName + " " + data.FirstOrDefault().LastName;
+                    Session["LastName"] =  data.FirstOrDefault().LastName;
                     Session["Email"] = data.FirstOrDefault().Email;
                     Session["idUser"] = data.FirstOrDefault().Id;
                     return RedirectToAction("Index");
@@ -85,25 +114,14 @@ namespace e_website.Controllers
             return View();
         }
 
-        public static string GetMD5(string str)
-        {
-            MD5 md5 = new MD5CryptoServiceProvider();
-            byte[] formData = Encoding.UTF8.GetBytes(str);
-            byte[] targetData = md5.ComputeHash(formData);
-            string byte2String = null;
 
-            for (int i = 0; i < targetData.Length; i++)
-            {
-                byte2String += targetData[i].ToString("x2");
-            }
-            return byte2String; 
-        }
-
+        //Logout
         public ActionResult Logout()
         {
             Session.Clear();//remove session
             return RedirectToAction("Login");
         }
+
         public ActionResult About()
         {
             ViewBag.Message = "Your application description page.";

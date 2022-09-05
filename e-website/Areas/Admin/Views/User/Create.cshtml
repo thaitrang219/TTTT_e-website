@@ -1,0 +1,69 @@
+﻿@model e_website.Context.User
+
+@{
+    ViewBag.Title = "Create";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Create</h2>
+
+<script src="~/Scripts/ckeditor/ckeditor.js"></script>
+
+@using (Html.BeginForm("Create", "User"))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+
+    <!-- Main content -->
+    <section class="content my-2">
+
+        <!-- Default box -->
+        <div class="card">
+            <div class="card-header">
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong class="text-danger text-uppercase">THÊM THÀNH VIÊN</strong>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <button class="btn btn-sm btn-success" type="submit" name="create"><i class="fas fa-save"></i> Lưu[Thêm]</button>
+                        <a href="@Url.Action("Index","User")" class="btn btn-sm btn-info"><i class="fas fa-long-arrow-alt-left"></i> Về danh sách</a>
+                    </div>
+                </div>
+            </div>
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="form-group">
+                            <label>Tên thành viên <span class="text-danger">(*)</span></label>
+                            @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Họ thành viên <span class="text-danger">(*)</span></label>
+                            @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                    <div class="col-md-3">
+                        <div class="form-group">
+                            <label>Email <span class="text-danger">(*)</span></label>
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+
+                        <div class="form-group">
+                            <label>Mật khẩu <span class="text-danger">(*)</span></label>
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- /.card-body -->
+        </div>
+        <!-- /.card -->
+
+    </section>
+    <!-- /.content -->
+}

@@ -1,0 +1,141 @@
+﻿@model e_website.Context.Product
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+
+<!-- Main content -->
+<section class="content my-2">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>XÁC NHẬN XOÁ SẢN PHẨM</strong>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="@Url.Action("Edit","Product", new { id = Model.Id })" class="btn btn-sm btn-success"><i class="fa fa-edit"></i> Cập nhật</a>
+                        <a href="@Url.Action("Index","Product")" class="btn btn-sm btn-info"><i class="fas fa-long-arrow-alt-left"></i> Về danh sách</a>
+                        <button class="btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Xoá</button>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr>
+                    <th style="width:120px;">Tên trường</th>
+                    <th>Nội dung</th>
+                </tr>
+                <tr>
+                    <td>Tên sản phẩm</td>
+                    <td>@Html.DisplayFor(model => model.Name)</td>
+                </tr>
+                <tr>
+                    <td>@Html.DisplayNameFor(model => model.Slug)</td>
+                    <td>@Html.DisplayFor(model => model.Slug)</td>
+                </tr>
+                <tr>
+                    <td>Danh mục</td>
+                    @if (Model.CategoryId == 1)
+                    {
+                        <td>TÂM LÝ - KỸ NĂNG SỐNG</td>
+                    }
+                    @if (Model.CategoryId == 2)
+                    {
+                        <td>VĂN HỌC</td>
+                    }
+                    @if (Model.CategoryId == 3)
+                    {
+                        <td>KHOA HỌC KỸ THUẬT</td>
+                    }
+                    @if (Model.CategoryId == 4)
+                    {
+                        <td>MANGA -COMIC</td>
+                    }
+                    
+                    </tr>
+                <tr>
+                    <td>Hình</td>
+                    <td><img src="~/Content/images/product/@Html.DisplayFor(model => model.Avatar)" style="width:100px;" /></td>
+                </tr>
+                <tr>
+                    <td>Mô tả đầy đủ</td>
+                    <td>@Html.DisplayFor(model => model.FullDescription)</td>
+                </tr>
+                <tr>
+                    <td>Mô tả đầy đủ</td>
+                    <td>@Html.DisplayFor(model => model.ShortDes)</td>
+                </tr>
+                <tr>
+                    <td>Loại sản phẩm</td>
+                    @if (Model.TypeId == 1)
+                    {
+                        <td>Giảm giá sốc</td>
+                    }
+                    @if (Model.TypeId == 2)
+                    {
+                        <td>Đề xuất</td>
+                    }
+                </tr>
+                <tr>
+                    <td>Thương hiệu</td>
+                    @if (Model.BrandId == 1)
+                    {
+                        <td>NXB Kim Đồng</td>
+                    }
+                    @if (Model.BrandId == 2)
+                    {
+                        <td>IPM</td>
+                    }
+                    @if (Model.BrandId == 3)
+                    {
+                        <td>NXB Trẻ</td>
+                    }
+                    @if (Model.BrandId == 4)
+                    {
+                        <td>Nhã Nam</td>
+                    }
+                    @if (Model.BrandId == 5)
+                    {
+                        <td>AZ Việt Nam</td>
+                    }
+                    @if (Model.BrandId == 6)
+                    {
+                        <td>Skybook</td>
+                    }
+
+                </tr>
+                <tr>
+                    <td>Giá</td>
+                    <td>@Html.DisplayFor(model => model.Price)</td>
+                </tr>
+                <tr>
+                    <td>Giá khuyến mãi</td>
+                    <td>@Html.DisplayFor(model => model.PriceDiscount)</td>
+                </tr>
+                <tr>
+                    <td>Ngày tạo</td>
+                    <td>@Html.DisplayFor(model => model.CreatedOnUtc)</td>
+                </tr>
+                <tr>
+                    <td>Ngày cập nhật</td>
+                    <td>@Html.DisplayFor(model => model.UpdatedOnUtc)</td>
+                </tr>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->

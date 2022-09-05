@@ -1,0 +1,66 @@
+﻿@model e_website.Context.User
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Areas/Admin/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+
+<!-- Main content -->
+<section class="content my-2">
+
+    <!-- Default box -->
+    <div class="card">
+        <div class="card-header">
+            @using (Html.BeginForm())
+            {
+                @Html.AntiForgeryToken()
+                <div class="row">
+                    <div class="col-md-6">
+                        <strong>XÁC NHẬN XOÁ THÀNH VIÊN</strong>
+                    </div>
+                    <div class="col-md-6 text-right">
+                        <a href="@Url.Action("Edit","User", new { id = Model.Id })" class="btn btn-sm btn-success"><i class="fa fa-edit"></i> Cập nhật</a>
+                        <a href="@Url.Action("Index","User")" class="btn btn-sm btn-info"><i class="fas fa-long-arrow-alt-left"></i> Về danh sách</a>
+                        <button class="btn btn-sm btn-danger" type="submit"><i class="fa fa-trash"></i> Xoá</button>
+                    </div>
+                </div>
+            }
+        </div>
+        <div class="card-body">
+            <table class="table table-bordered">
+                <tr>
+                    <th style="width:120px;">Tên trường</th>
+                    <th>Nội dung</th>
+                </tr>
+                <tr>
+                    <td>Tên</td>
+                    <td>@Html.DisplayFor(model => model.FirstName)</td>
+                </tr>
+                <tr>
+                    <td>Họ</td>
+                    <td>@Html.DisplayFor(model => model.LastName)</td>
+                </tr>
+                <tr>
+                    <td>Email</td>
+                    <td>@Html.DisplayFor(model => model.Email)</td>
+                </tr>
+                <tr>
+                    <td>Mật khẩu</td>
+                    <td>@Html.DisplayFor(model => model.Password)</td>
+                </tr>
+                <tr>
+                    <td>Quyền</td>
+                    <td>@Html.DisplayFor(model => model.IsAdmin)</td>
+                </tr>
+            </table>
+        </div>
+        <!-- /.card-body -->
+    </div>
+    <!-- /.card -->
+
+</section>
+<!-- /.content -->

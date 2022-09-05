@@ -1,4 +1,5 @@
 ﻿using e_website.Context;
+using PagedList;
 using System;
 using System.Collections.Generic;
 using System.Data.Entity.Core.Objects;
@@ -15,6 +16,9 @@ namespace e_website.Controllers
 
 
         // GET: Product
+       
+
+
         public ActionResult Detail(int Id)
         {
             var objProducts = objqlbhEntities.Products.Where(n => n.Id== Id).FirstOrDefault();

@@ -1,7 +1,7 @@
 ﻿@model e_website.Context.User
+
 @{
     ViewBag.Title = "Login";
-    Layout = "~/Views/Shared/_Layout.cshtml";
 }
 
 <div class="row justify-content-md-center">
@@ -21,11 +21,11 @@
                     </div>
                     <div class="form-group">
                         Mật khẩu
-                        @Html.LabelFor(m=>m.Password)
-                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = " Password" })
+                        @Html.LabelFor(m => m.Password)
+                        @Html.PasswordFor(m => m.Password, new { @class = "form-control", @placeholder = "Mật khẩu" })
                     </div>
                     <div class="form-group text-center">
-                        <input type="submit" name="submit" class="btn btn-primary" value="Login" />
+                        <input type="submit" name="submit" class="btn btn-primary" value="Đăng nhập" />
                     </div>
                     <hr />
                     <div class="text-center btn  btn-sm btn-success text-white" style="margin-left:40%">
